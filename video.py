@@ -1,8 +1,9 @@
 import os
 import requests
 import json
-from moviepy.editor import VideoFileClip, concatenate_videoclips, AudioFileClip
 import random
+import webbrowser
+from moviepy.editor import VideoFileClip, concatenate_videoclips, AudioFileClip
 
 def create_final_video_with_background_music(video_files, background_music, output_file, fade_duration=1.5):
     # Read all video clips and the background music clip
@@ -78,6 +79,13 @@ def more_video_download():
     if more == "n":
         return False
 
+def clean_videos():
+    more = input("Do you download clean previous videos? y/n: ")
+    if more == "y":
+        return True
+    if more == "n":
+        return False
+    
 def get_video_durations():
     url = "http://16.171.160.129/favorites/get_video_durations"
     payload={}
@@ -108,9 +116,16 @@ background_music = AudioFileClip("./audios/" + audio_file)
 #     clean_file(root_path)
 #     file_download(root_path)
 
+clean_video = clean_videos()
+if clean_video:
+    clean_file(root_path)
+    
 if background_music.duration > get_video_durations():
     print("Need more videos")
+    url = "http://16.171.160.129/stocks-videos"
+    webbrowser.open(url, new=0, autoraise=True)
 else:
+    file_download(root_path)
     create_final_video_with_background_music(video_files, background_music, output_file, fade_duration=1)
 
 

@@ -1,5 +1,5 @@
-import random, os
+import webbrowser
 
-audio_path = './audios'
-audio_file = random.choice(os.listdir(audio_path))
-print("./audios" + audio_file)
+url = "http://16.171.160.129/stocks-videos"
+
+webbrowser.open(url, new=0, autoraise=True)
