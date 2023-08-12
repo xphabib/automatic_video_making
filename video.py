@@ -29,7 +29,7 @@ def create_final_video_with_background_music(video_files, background_music, outp
     final_video = final_video.set_audio(background_music)
 
     # Export the final video with background music
-    final_video.write_videofile(output_file, codec="libx264", audio_codec="aac")
+    final_video.write_videofile("./outputs/"+output_file, codec="libx264", audio_codec="aac")
 
     # Close the video clips and background music clip
     final_video.close()
